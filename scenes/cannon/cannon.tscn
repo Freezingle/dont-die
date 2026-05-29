@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://jefslqvmq0s5"]
+
+[ext_resource type="Script" uid="uid://bl8mrg5ylc8a4" path="res://scripts/cannon.gd" id="1_4r05k"]
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource("1_4r05k")
+
+[node name="Base" type="Polygon2D" parent="."]
+position = Vector2(0, -60)
+color = Color(0.61357224, 0.6770747, 0.18819505, 1)
+polygon = PackedVector2Array(1, -4, 193, -4, 247, 76, 181, 159, -3, 151, -87, 92)
+
+[node name="Barrel" type="Polygon2D" parent="."]
+position = Vector2(24, -94)
+color = Color(0.68650734, 0.30199802, 0.9145522, 1)
+polygon = PackedVector2Array(-63.000008, 91, 294.33334, -23.333336, 90.66666, 94.666664, 268.66666, 243.33334, 105, 184)
+uv = PackedVector2Array(105, 67, 293, 34, 268, 92, 302, 138)
+
+[node name="Laser" type="Line2D" parent="."]
+position = Vector2(-5, 4)
+points = PackedVector2Array(0, 0, 2200, 0)
+width = 4.0
+default_color = Color(0.8784314, 0.1254902, 0.13333334, 1)
+antialiased = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
