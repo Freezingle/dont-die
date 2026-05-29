@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw5lw6tuawk1u"]
+[gd_scene load_steps=2 format=3 uid="uid://dw5lw6tuawk1u"]
 
-[ext_resource type="Script" uid="uid://bnroqcf028cg6" path="res://scripts/player.gd" id="1_o5qli"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0wfyh"]
-radius = 30.0
+[ext_resource type="PackedScene" uid="uid://bmvxe18rvy0wh" path="res://scenes/player/player.tscn" id="1_o5qli"]
 
 [node name="Main" type="Node2D"]
 
@@ -15,14 +12,10 @@ color = Color(0.07683582, 0.07683582, 0.07683582, 1)
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Player" type="CharacterBody2D" parent="World"]
-script = ExtResource("1_o5qli")
+[node name="Player" parent="World" instance=ExtResource("1_o5qli")]
+position = Vector2(932, 576)
 
-[node name="CicleShape2D" type="CollisionShape2D" parent="World/Player"]
-shape = SubResource("CircleShape2D_0wfyh")
-
-[node name="Sprite2D" type="Polygon2D" parent="World/Player"]
-color = Color(0.6504529, 0.79774594, 0.97750324, 1)
-polygon = PackedVector2Array(-31, 0, -30, -17, -18, -27, -6, -33, 9, -32, 25, -22, 32, -10, 34, 4, 28, 21, 16, 29, 3, 34, -12, 32, -26, 23, -31, 12)
+[node name="Camera2D" type="Camera2D" parent="World"]
+position = Vector2(960, 538)
 
 [node name="UI" type="CanvasLayer" parent="."]
