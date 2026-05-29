@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw5lw6tuawk1u"]
+[gd_scene load_steps=4 format=3 uid="uid://dw5lw6tuawk1u"]
 
 [ext_resource type="PackedScene" uid="uid://bmvxe18rvy0wh" path="res://scenes/player/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://jefslqvmq0s5" path="res://scenes/cannon/cannon.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://pxmjt7yeglnr" path="res://scripts/cannon_spawner.gd" id="3_sugp2"]
 
 [node name="Main" type="Node2D"]
 
@@ -17,5 +19,13 @@ position = Vector2(932, 576)
 
 [node name="Camera2D" type="Camera2D" parent="World"]
 position = Vector2(960, 538)
+
+[node name="CannonSpawner" type="Node" parent="World"]
+script = ExtResource("3_sugp2")
+cannon_scene = ExtResource("2_0wfyh")
+
+[node name="SpawnTimer" type="Timer" parent="World/CannonSpawner"]
+wait_time = 2.0
+autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
