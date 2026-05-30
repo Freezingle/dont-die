@@ -1,7 +1,7 @@
 extends Node 
 
 @export var cannon_scene : PackedScene
-@onready var spawn_timer = $SpawnTimer
+@onready var spawn_timer :Timer = $SpawnTimer
 
 func _ready():
 	spawn_timer.timeout.connect(spawn_cannon)

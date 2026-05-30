@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw5lw6tuawk1u"]
+[gd_scene load_steps=5 format=3 uid="uid://dw5lw6tuawk1u"]
 
+[ext_resource type="Script" uid="uid://dyuv2js5e6tc4" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bmvxe18rvy0wh" path="res://scenes/player/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://jefslqvmq0s5" path="res://scenes/cannon/cannon.tscn" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://pxmjt7yeglnr" path="res://scripts/cannon_spawner.gd" id="3_sugp2"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_jyhfs")
 
 [node name="Background" type="ColorRect" parent="."]
 offset_top = 4.0
@@ -17,9 +19,6 @@ color = Color(0.07683582, 0.07683582, 0.07683582, 1)
 [node name="Player" parent="World" instance=ExtResource("1_o5qli")]
 position = Vector2(932, 576)
 
-[node name="Camera2D" type="Camera2D" parent="World"]
-position = Vector2(960, 538)
-
 [node name="CannonSpawner" type="Node" parent="World"]
 script = ExtResource("3_sugp2")
 cannon_scene = ExtResource("2_0wfyh")
@@ -29,3 +28,47 @@ wait_time = 2.0
 autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_left = 1567.0
+offset_top = 97.0
+offset_right = 1607.0
+offset_bottom = 185.0
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="GameOverUI" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 19.0
+offset_top = -27.0
+offset_right = 59.0
+offset_bottom = 13.0
+
+[node name="GameOverUI" type="Label" parent="UI/GameOverUI"]
+process_mode = 2
+layout_mode = 0
+offset_left = 737.0
+offset_top = 524.0
+offset_right = 1104.0
+offset_bottom = 612.0
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
+
+[node name="RestartButton" type="Button" parent="UI/GameOverUI"]
+process_mode = 2
+layout_mode = 0
+offset_left = 778.0
+offset_top = 642.0
+offset_right = 1053.0
+offset_bottom = 738.0
+theme_override_font_sizes/font_size = 64
+text = "RESTART"
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true

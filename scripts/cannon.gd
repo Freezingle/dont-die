@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var rotation_speed: = 6.0
+@export var projectile_scene : PackedScene
+
 var player: CharacterBody2D
 @onready var laser = $Laser
 @onready var shoot_timer = $ShootTimer
@@ -25,4 +27,8 @@ func _process(delta):
 
 func shoot ():
 	laser.visible =false
-	print ("BANG!")
+	var projectile = projectile_scene.instantiate()
+	projectile.global_position = global_position
+	#forward direction based on canon rotation
+	projectile.direction = Vector2.RIGHT.rotated(rotation)
+	get_parent().add_child(projectile)

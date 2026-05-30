@@ -1,6 +1,9 @@
 extends CharacterBody2D
 #TODO: MAKE MOVEMENT MORE SNAPPY AND QUICK
 #TODO: MAKE USER STOP MOVING WHEN IT TOUCHES BORDER
+
+signal died
+
 @export var max_speed :=700.0
 @export var acceleration := 6000.0
 @export var friction := 2000.0
@@ -8,6 +11,7 @@ extends CharacterBody2D
 #for mobile devices
 var touch_target := Vector2.ZERO
 var using_touch := false
+var is_dead := false
 
 func _ready():
 	touch_target = global_position
@@ -50,3 +54,10 @@ func clamp_to_screen():
 	global_position.x = clamp (global_position.x, 0, screen_size.x)
 	global_position.y = clamp(global_position.y, 0, screen_size.y)
 		
+func _die():
+	if is_dead:
+		return
+	is_dead = true
+	died.emit()
+	print("Player died")
+	queue_free()
