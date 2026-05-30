@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bugkr1ubxj8xy"]
+[gd_scene load_steps=4 format=3 uid="uid://bugkr1ubxj8xy"]
 
 [ext_resource type="Script" uid="uid://da7hxgm6tvhkp" path="res://scripts/pit.gd" id="1_yoox7"]
+[ext_resource type="PackedScene" uid="uid://d01ovxjs3e6ws" path="res://scenes/projectile/projectile.tscn" id="2_gkysh"]
 
-[node name="Pit" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_gkysh"]
+radius = 43.0
+
+[node name="Pit" type="Area2D"]
 script = ExtResource("1_yoox7")
+projectile_scene = ExtResource("2_gkysh")
 
 [node name="Body" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(0, -48, -45, -32, -70, 10, -28, 39, 22, 47, 56, 15, 47, -32)
@@ -39,3 +44,6 @@ autostart = true
 [node name="TelegraphTimer" type="Timer" parent="."]
 wait_time = 0.7
 one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gkysh")

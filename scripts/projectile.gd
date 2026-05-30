@@ -1,5 +1,6 @@
 extends Area2D
 
+
 @export var speed :=1200.0
 var direction := Vector2.RIGHT
 
