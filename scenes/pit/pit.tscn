@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://bugkr1ubxj8xy"]
+
+[ext_resource type="Script" uid="uid://da7hxgm6tvhkp" path="res://scripts/pit.gd" id="1_yoox7"]
+
+[node name="Pit" type="Node2D"]
+script = ExtResource("1_yoox7")
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -48, -45, -32, -70, 10, -28, 39, 22, 47, 56, 15, 47, -32)
+
+[node name="LaserTop" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 2200, 0)
+width = 2.0
+default_color = Color(0.8784314, 0.1254902, 0.13333334, 1)
+
+[node name="LaserBottom" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 2200, 0)
+width = 4.0
+default_color = Color(0.8784314, 0.1254902, 0.13333334, 1)
+
+[node name="LaserLeft" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 2200, 0)
+width = 4.0
+default_color = Color(0.8784314, 0.1254902, 0.13333334, 1)
+
+[node name="LaserRight" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 2200, 0)
+width = 4.0
+default_color = Color(0.8784314, 0.1254902, 0.13333334, 1)
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true

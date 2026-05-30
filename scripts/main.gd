@@ -1,39 +1,40 @@
 extends Node2D
 
-var score := 0
-var game_over := false
+enum GamePhase {
+	LEVEL_1,
+	LEVEL_2,
+	FINAL_LEVEL,
+	VICTORY
+}
 
-@onready var score_label = $UI/ScoreLabel
+var game_over := false
+var current_phase = GamePhase.LEVEL_1
+var elapsed_time :=0
+
 
 @onready var game_over_ui = $UI/GameOverUI
 @onready var restart_button = $UI/GameOverUI/RestartButton
-
-@onready var score_timer = $ScoreTimer
 @onready var difficulty_timer = $DifficultyTimer
-
+@onready var level_label = $UI/RootUI/LevelLabel
+@onready var timer_label = $UI/RootUI/TimerLabel
 @onready var cannon_spawner = $World/CannonSpawner
-
+@onready var level_timer = $LevelTimer
 
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
-
+	level_timer.timeout.connect(_on_level_timer_timeout)
 	if player:
 		player.died.connect(on_player_died)
 
 	restart_button.pressed.connect(restart_game)
-
-	score_timer.timeout.connect(increase_score)
 	difficulty_timer.timeout.connect(increase_difficulty)
-
-	update_score_ui()
+	level_label.text = "LEVEL 1"
+	update_timer_ui()
 
 
 func increase_score():
 	if game_over:
 		return
-
-	score += 1
-	update_score_ui()
 
 
 func increase_difficulty():
@@ -41,11 +42,36 @@ func increase_difficulty():
 		cannon_spawner.spawn_timer.wait_time -= 0.15
 
 
-func update_score_ui():
-	score_label.text = "SCORE: " + str(score)
+# game clock
+func _on_level_timer_timeout():
+	elapsed_time +=1
+	update_timer_ui()
+	check_phase_progression()
 
+func update_timer_ui():
+	match current_phase:
+		GamePhase.LEVEL_1:
+			timer_label.text = "NEXT LEVEL: " + str(max(0,60-elapsed_time))
+		GamePhase.LEVEL_2:
+			timer_label.text = "FINAL LEVEL: " + str(max(0,90-elapsed_time))
 
+func check_phase_progression():
+	if current_phase == GamePhase.LEVEL_1 and elapsed_time >= 60:
+		start_level_2()
+	elif current_phase == GamePhase.LEVEL_2 and elapsed_time >=90:
+		start_final_level()
+		
+		
+func start_level_2():
+	current_phase = GamePhase.LEVEL_2
+	level_label.text = "LEVEL 2"
+	difficulty_timer.stop()
+	print("LEVEL 2 STARTED")
 
+func start_final_level():
+	current_phase = GamePhase.FINAL_LEVEL
+	level_label.text = "FINAL LEVEL"
+	print("FINAL LEVEL STARTED")
 
 func on_player_died():
 	if game_over:

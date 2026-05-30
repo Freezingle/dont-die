@@ -54,7 +54,7 @@ func clamp_to_screen():
 	global_position.x = clamp (global_position.x, 0, screen_size.x)
 	global_position.y = clamp(global_position.y, 0, screen_size.y)
 		
-func _die():
+func die():
 	if is_dead:
 		return
 	is_dead = true
