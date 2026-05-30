@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var pit_scene : PackedScene
+@export var bomb_scene : PackedScene
 
 enum GamePhase {
 	LEVEL_1,
@@ -14,6 +15,7 @@ var current_phase = GamePhase.LEVEL_1
 var elapsed_time :=0
 var pit : Node2D #storing pit reference for increasing difficulty later
 var pit_difficulty_timer :=0.0
+var bomb_phase 
 
 
 @onready var game_over_ui = $UI/GameOverUI
@@ -23,7 +25,7 @@ var pit_difficulty_timer :=0.0
 @onready var timer_label = $UI/RootUI/TimerLabel
 @onready var cannon_spawner = $World/CannonSpawner
 @onready var level_timer = $LevelTimer
-
+@onready var cannon_spawnner = $World/CannonSpawner
 
 func _process (delta):
 	if current_phase != GamePhase.LEVEL_2:
@@ -72,7 +74,7 @@ func update_timer_ui():
 			timer_label.text = "FINAL LEVEL: " + str(max(0,90-elapsed_time))
 
 func check_phase_progression():
-	if current_phase == GamePhase.LEVEL_1 and elapsed_time >= 60:
+	if current_phase == GamePhase.LEVEL_1 and elapsed_time >=60:
 		start_level_2()
 	elif current_phase == GamePhase.LEVEL_2 and elapsed_time >=100:
 		start_final_level()
@@ -88,6 +90,16 @@ func start_level_2():
 func start_final_level():
 	current_phase = GamePhase.FINAL_LEVEL
 	level_label.text = "FINAL LEVEL"
+	# STOP CANNONS
+	if cannon_spawner:
+		cannon_spawner.queue_free()
+
+	# REMOVE PIT
+	if pit:
+		pit.queue_free()
+
+	spawn_bomb_phase()
+
 	print("FINAL LEVEL STARTED")
 
 func on_player_died():
@@ -107,6 +119,16 @@ func spawn_pit():
 	var screen_size = get_viewport().get_visible_rect().size
 	pit.global_position = screen_size / 2
 	$World.add_child(pit)
+
+func spawn_bomb_phase():
+	if bomb_phase:
+		return
+	bomb_phase = bomb_scene.instantiate()
+	add_child(bomb_phase)
+	bomb_phase.phase_completed.connect(_on_bomb_phase_completed)
+	
+func _on_bomb_phase_completed():
+	print("YOU WIN")
 
 func restart_game():
 	get_tree().paused = false

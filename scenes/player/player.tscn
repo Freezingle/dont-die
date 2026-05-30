@@ -9,7 +9,7 @@ radius = 30.0
 collision_mask = 2
 script = ExtResource("1_8afob")
 
-[node name="CicleShape2D" type="CollisionShape2D" parent="."]
+[node name="CircleShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0wfyh")
 
 [node name="Sprite2D" type="Polygon2D" parent="."]
