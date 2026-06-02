@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw71joc3u15a7"]
+
+[ext_resource type="Script" uid="uid://cmp6h03a3iccx" path="res://scripts/about_menu.gd" id="1_o6ral"]
+[ext_resource type="Texture2D" uid="uid://e5osq3l8ky7v" path="res://Logo.png" id="2_lxf2e"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_o6ral")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1914.0
+offset_bottom = 1082.0
+color = Color(0, 0.1254902, 0.11764706, 1)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 656.0
+offset_top = 94.0
+offset_right = 1545.0
+offset_bottom = 419.0
+theme_override_font_sizes/font_size = 64
+text = "ABOUT GAME"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 635.0
+offset_top = 257.0
+offset_right = 1120.0
+offset_bottom = 903.0
+theme_override_font_sizes/normal_font_size = 32
+text = "Controls
+
+PC:
+WASD/ARROWKEYS OR Mouse
+
+Mobile:
+Touch and Drag
+
+
+Interested in contributing art, sound effects, music, or other assets?
+Contact me on Discord: frieza_saiyan"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 618.0
+offset_top = 961.0
+offset_right = 1117.0
+offset_bottom = 1038.0
+theme_override_font_sizes/font_size = 32
+text = "BACK"
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(1588.5, 541.5)
+scale = Vector2(1.327, 2.127)
+texture = ExtResource("2_lxf2e")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

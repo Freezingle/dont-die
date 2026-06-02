@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8xjryixi4scu"]
+
+[ext_resource type="Script" uid="uid://hebygx0jmwxy" path="res://scripts/control.gd" id="1_6jbdy"]
+[ext_resource type="Texture2D" uid="uid://e5osq3l8ky7v" path="res://Logo.png" id="2_iwbf0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_6jbdy")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1914.0
+offset_bottom = 1079.0
+color = Color(0, 0.12583008, 0.11678816, 1)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 737.0
+offset_top = 172.0
+offset_right = 1172.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 64
+text = "D O N ' T  D I E"
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 758.0
+offset_top = 382.0
+offset_right = 1158.0
+offset_bottom = 518.0
+theme_override_colors/font_color = Color(0.7766745, 0.95838076, 0.14314604, 1)
+theme_override_colors/font_focus_color = Color(0.96773547, 0.93998486, 0.95994014, 1)
+theme_override_font_sizes/font_size = 32
+text = "PLAY"
+
+[node name="AboutButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 666.0
+offset_top = 601.0
+offset_right = 1226.0
+offset_bottom = 733.0
+theme_override_colors/font_color = Color(0.8152702, 0.9434303, 0.27945155, 1)
+theme_override_font_sizes/font_size = 64
+text = "ABOUT "
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(1594, 541.5)
+scale = Vector2(1.277344, 2.126953)
+texture = ExtResource("2_iwbf0")
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="AboutButton" to="." method="_on_about_button_pressed"]
