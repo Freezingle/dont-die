@@ -112,4 +112,4 @@ func check_survival():
 
 	if player:
 		print("DEATH")
-		player.die() 
+		#player.die() 

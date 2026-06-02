@@ -4,6 +4,16 @@ extends CharacterBody2D
 
 signal died
 
+enum VisualState{
+	IDLE,
+	RUNNING,
+	BALL,
+	STOPPING
+}
+var visual_state = VisualState.IDLE
+
+@onready var sprite = $AnimatedSprite2D
+
 @export var max_speed :=700.0
 @export var acceleration := 6000.0
 @export var friction := 2000.0
@@ -15,12 +25,39 @@ var is_dead := false
 
 func _ready():
 	touch_target = global_position
+	sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta):
 	handle_touch_input()
 	handle_keyboard_input(delta)
+	update_animation_state()
+	update_facing()
 	clamp_to_screen()
 	move_and_slide()
+
+func _on_animation_finished():
+	if sprite.animation == "running":
+		visual_state = VisualState.BALL
+		sprite.pause()
+	elif sprite.animation == "stopping":
+		visual_state = VisualState.IDLE
+		sprite.play("idle")
+
+#detect movement
+func update_animation_state():
+	var moving := velocity.length() > 50.0
+	if moving:
+		if visual_state == VisualState.IDLE:
+			visual_state = VisualState.RUNNING
+			sprite.play("running")
+	else:
+		if visual_state == VisualState.BALL:
+			visual_state = VisualState.STOPPING
+			sprite.play("stopping")
+
+func update_facing():
+	if velocity.length() > 20:
+		sprite.rotation = velocity.angle()
 
 func handle_keyboard_input(delta):
 	var input_vector = Vector2.ZERO

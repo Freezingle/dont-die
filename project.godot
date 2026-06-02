@@ -13,7 +13,6 @@ config_version=5
 config/name="Don't Die"
 run/main_scene="uid://dw5lw6tuawk1u"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
 
 [display]
 
@@ -53,3 +52,7 @@ touch={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(300, 13),"global_position":Vector2(309, 61),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 , null]
 }
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

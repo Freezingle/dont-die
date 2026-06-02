@@ -16,7 +16,7 @@ bomb_scene = ExtResource("6_tefeu")
 offset_top = 4.0
 offset_right = 1918.0
 offset_bottom = 1070.0
-color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+color = Color(0.36445537, 0.11758038, 0.5438331, 1)
 
 [node name="World" type="Node2D" parent="."]
 
@@ -94,3 +94,5 @@ autostart = true
 [node name="LevelTimer" type="Timer" parent="."]
 autostart = true
 ignore_time_scale = true
+
+[node name="BombPhase" parent="." instance=ExtResource("6_tefeu")]
