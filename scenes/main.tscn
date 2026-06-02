@@ -13,9 +13,17 @@ pit_scene = ExtResource("5_tbgi4")
 bomb_scene = ExtResource("6_tefeu")
 
 [node name="Background" type="ColorRect" parent="."]
-offset_top = 4.0
-offset_right = 1918.0
-offset_bottom = 1070.0
+offset_left = -48.0
+offset_top = -39.0
+offset_right = 1976.0
+offset_bottom = 1096.0
+color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+
+[node name="Background2" type="ColorRect" parent="."]
+offset_left = -48.0
+offset_top = -39.0
+offset_right = 1976.0
+offset_bottom = 1096.0
 color = Color(0.07683582, 0.07683582, 0.07683582, 1)
 
 [node name="World" type="Node2D" parent="."]
@@ -68,24 +76,36 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="LevelLabel" type="Label" parent="UI/RootUI"]
+[node name="AnnouncementLabel" type="Label" parent="UI/RootUI"]
 layout_mode = 0
-offset_left = 34.0
-offset_top = 27.0
-offset_right = 143.0
-offset_bottom = 120.0
+offset_right = 40.0
+offset_bottom = 23.0
 theme_override_font_sizes/font_size = 32
-text = "LEVEL1
-"
 
-[node name="TimerLabel" type="Label" parent="UI/RootUI"]
+[node name="VictoryUI" type="Control" parent="UI"]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI/VictoryUI"]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 84.0
-offset_right = 63.0
-offset_bottom = 129.0
+offset_left = 846.0
+offset_top = 363.0
+offset_right = 886.0
+offset_bottom = 451.0
+theme_override_font_sizes/font_size = 64
+
+[node name="MainMenu" type="Button" parent="UI/VictoryUI"]
+layout_mode = 0
+offset_left = 716.0
+offset_top = 674.0
+offset_right = 1148.0
+offset_bottom = 786.0
 theme_override_font_sizes/font_size = 32
-text = "TIME : 60"
+text = "QUIT TO MAIN MENU"
 
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -94,3 +114,5 @@ autostart = true
 [node name="LevelTimer" type="Timer" parent="."]
 autostart = true
 ignore_time_scale = true
+
+[connection signal="pressed" from="UI/VictoryUI/MainMenu" to="." method="_on_main_menu_pressed"]
