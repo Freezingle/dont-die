@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://fph1sg40v0lh"]
+
+[ext_resource type="Script" uid="uid://cq8bhnom0ue7b" path="res://scripts/transition.gd" id="1_wlg0m"]
+[ext_resource type="PackedScene" uid="uid://d01ovxjs3e6ws" path="res://scenes/projectile/projectile.tscn" id="2_kg44o"]
+
+[node name="Transition" type="Node2D"]
+script = ExtResource("1_wlg0m")
+projectile_scene = ExtResource("2_kg44o")
+
+[node name="Timer" type="Timer" parent="."]

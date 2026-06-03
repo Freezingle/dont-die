@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bl8mrg5ylc8a4" path="res://scripts/cannon.gd" id="1_4r05k"]
 [ext_resource type="PackedScene" uid="uid://d01ovxjs3e6ws" path="res://scenes/projectile/projectile.tscn" id="2_xgg2g"]
 
-[node name="Cannon" type="Node2D"]
+[node name="Cannon" type="Node2D" groups=["cannon"]]
 script = ExtResource("1_4r05k")
 projectile_scene = ExtResource("2_xgg2g")
 
