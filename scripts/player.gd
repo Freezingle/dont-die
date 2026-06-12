@@ -7,6 +7,7 @@ signal died
 @export var max_speed :=700.0
 @export var acceleration := 6000.0
 @export var friction := 2000.0
+@export var rotation_speed := 20.0
 
 #for mobile devices
 var touch_target := Vector2.ZERO
@@ -17,10 +18,20 @@ func _ready():
 	touch_target = global_position
 
 func _physics_process(delta):
-	handle_touch_input()
 	handle_keyboard_input(delta)
+	target_to_mouse(delta)
 	clamp_to_screen()
 	move_and_slide()
+
+func target_to_mouse(delta):
+	var mouse_pos = get_global_mouse_position()
+	var to_mouse = mouse_pos - global_position
+	
+	if to_mouse.length()<30.0:
+		return
+	var target_angle = to_mouse.angle()
+	rotation = lerp_angle(rotation,target_angle,rotation_speed*delta)
+	
 
 func handle_keyboard_input(delta):
 	var input_vector = Vector2.ZERO
@@ -31,22 +42,8 @@ func handle_keyboard_input(delta):
 	
 	if input_vector!= Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
-	#touch movement 
-	elif using_touch:
-		var direction = global_position.direction_to(touch_target)
-		if global_position.distance_to(touch_target) >10:
-			velocity = velocity.move_toward(direction* max_speed, acceleration * delta)
-		else:
-			velocity = velocity.move_toward(Vector2.ZERO, friction* delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction* delta)
-
-func handle_touch_input():
-	if Input.is_action_pressed("touch"):
-		using_touch = true
-		touch_target = get_global_mouse_position()
-	elif Input.is_action_just_released("touch"):
-		using_touch = false
 
 func clamp_to_screen():
 	var screen_size = get_viewport_rect().size

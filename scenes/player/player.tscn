@@ -3,16 +3,18 @@
 [ext_resource type="Script" uid="uid://bnroqcf028cg6" path="res://scripts/player.gd" id="1_8afob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0wfyh"]
-radius = 30.0
+radius = 26.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_8afob")
 
-[node name="CircleShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_0wfyh")
-
 [node name="Sprite2D" type="Polygon2D" parent="."]
+position = Vector2(93, 22)
+scale = Vector2(4, 1.6666666)
 color = Color(0.6504529, 0.79774594, 0.97750324, 1)
 antialiased = true
-polygon = PackedVector2Array(-31, 0, -30, -17, -18, -27, -6, -33, 9, -32, 25, -22, 32, -10, 34, 4, 28, 21, 16, 29, 3, 34, -12, 32, -26, 23, -31, 12)
+polygon = PackedVector2Array(-23.25, 4.799999, -36.5, -13.800001, -29.25, -40.200005, -23.25, -15.000001, -15.25, -40.200005, -10, -13.200001)
+
+[node name="CircleShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0wfyh")
